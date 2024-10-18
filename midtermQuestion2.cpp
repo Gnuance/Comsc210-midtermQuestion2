@@ -293,6 +293,7 @@ int main()
     string fileLine = "";
     DoublyLinkedList coffeeLine;
     string name = "";
+    int nameIndex = 0;
 
     // Add names to vector
     ifstream inputFile("names.txt");
@@ -330,22 +331,25 @@ int main()
         }
         if (NewCustomerJoinsLine)
         {
-            coffeeLine.push_back(names.at((rand() % 99) + 1));
+            name = names.at(RandCustomerInt());
+            coffeeLine.push_back(name);
         }
         if (CustomerEndOfLineLeaves)
         {
             coffeeLine.pop_back();
         }
-        // for (int i = 0; i < coffeeLine.getSize(); i++)
-        // {
-        //     if (AnyCustomerLeaves())
-        //     {
-        //         coffeeLine.delete_pos(i);
-        //     }
-        // }
+        // This is the loop to check if any particular customer wants to leave.
+        for (int i = 1; i < coffeeLine.getSize(); i++)
+        {
+            if (AnyCustomerLeaves())
+            {
+                coffeeLine.delete_pos(i);
+            }
+        }
         if (VipStraightToFront())
         {
-            coffeeLine.push_front(names.at(RandCustomerInt()));
+            name = names.at(RandCustomerInt());
+            coffeeLine.push_front(name);
         }
         cout << "Resulting list: ";
         coffeeLine.print();
