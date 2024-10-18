@@ -50,14 +50,15 @@ public:
     }
 
     // Returns size of list
-    int getSize() {
+    int getSize()
+    {
         unsigned int count = 0;
-        Node* temp = head;
+        Node *temp = head;
         while (temp)
         {
             count++;
             temp = temp->next;
-        }      
+        }
         return count;
     }
 
@@ -130,7 +131,7 @@ public:
             return;
         }
 
-        if (pos == 0)
+        if (pos == 1)
         {
             pop_front();
             return;
@@ -138,7 +139,7 @@ public:
 
         Node *temp = head;
 
-        for (int i = 0; i < pos; i++)
+        for (int i = 1; i < pos; i++)
         {
             if (!temp)
             {
@@ -252,7 +253,8 @@ public:
         }
         while (current)
         {
-            if (count > 0) cout << ", ";
+            if (count > 0)
+                cout << ", ";
             cout << current->name;
             current = current->next;
             count++;
@@ -315,7 +317,7 @@ int main()
         coffeeLine.push_back(name);
         cout << "\t" << name << " joins the line" << endl;
     }
-    
+
     cout << "Resulting list: ";
     coffeeLine.print();
 
@@ -328,22 +330,26 @@ int main()
         }
         if (NewCustomerJoinsLine)
         {
-            coffeeLine.push_back(names.at(RandCustomerInt()));
+            coffeeLine.push_back(names.at((rand() % 99) + 1));
         }
         if (CustomerEndOfLineLeaves)
         {
             coffeeLine.pop_back();
         }
-        for (int i = 0; i < coffeeLine.getSize(); i++)
+        // for (int i = 0; i < coffeeLine.getSize(); i++)
+        // {
+        //     if (AnyCustomerLeaves())
+        //     {
+        //         coffeeLine.delete_pos(i);
+        //     }
+        // }
+        if (VipStraightToFront())
         {
-            /* code */
+            coffeeLine.push_front(names.at(RandCustomerInt()));
         }
-        
-        
-        
-        
+        cout << "Resulting list: ";
+        coffeeLine.print();
     }
-    
 
     return 0;
 }
@@ -368,6 +374,7 @@ bool VipStraightToFront()
 {
     return ((rand() % 100) + 1) <= 10;
 }
-unsigned long RandCustomerInt(){
+unsigned long RandCustomerInt()
+{
     return (rand() % 99) + 1;
 }
