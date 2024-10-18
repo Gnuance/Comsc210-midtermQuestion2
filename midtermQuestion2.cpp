@@ -231,6 +231,7 @@ public:
     }
     void print()
     {
+        int count = 0;
         Node *current = head;
         if (!current)
         {
@@ -239,8 +240,10 @@ public:
         }
         while (current)
         {
-            cout << current->name << " ";
+            if (count > 0) cout << ", ";
+            cout << current->name;
             current = current->next;
+            count++;
         }
         cout << endl;
     }
@@ -267,6 +270,7 @@ bool NewCustomerJoinsLine();
 bool CustomerEndOfLineLeaves();
 bool AnyCustomerLeaves();
 bool VipStraightToFront();
+int RandCustomerInt();
 
 int main()
 {
@@ -296,11 +300,33 @@ int main()
     for (int i = 0; i < 5; i++)
     {
         name = names.at((rand() % 99) + 1);
-
         coffeeLine.push_back(name);
+        cout << "\t" << name << " joins the line" << endl;
     }
     
+    cout << "Resulting list: ";
     coffeeLine.print();
+
+    // For time step 2 and beyond
+    for (int i = 2; i <= 20; i++)
+    {
+        if (FrontCustomerHelped)
+        {
+            coffeeLine.pop_front();
+        }
+        if (NewCustomerJoinsLine)
+        {
+            coffeeLine.push_back();
+        }
+        if (CustomerEndOfLineLeaves)
+        {
+            coffeeLine.pop_back();
+        }
+        
+        
+        
+    }
+    
 
     return 0;
 }
@@ -324,4 +350,7 @@ bool AnyCustomerLeaves()
 bool VipStraightToFront()
 {
     return ((rand() % 100) + 1) <= 10;
+}
+int RandCustomerInt(){
+    return (rand() % 99) + 1;
 }
