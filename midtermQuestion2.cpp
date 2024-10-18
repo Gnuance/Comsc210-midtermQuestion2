@@ -49,6 +49,18 @@ public:
         tail = nullptr;
     }
 
+    // Returns size of list
+    int getSize() {
+        unsigned int count = 0;
+        Node* temp = head;
+        while (temp)
+        {
+            count++;
+            temp = temp->next;
+        }      
+        return count;
+    }
+
     void insert_after(string value, int position)
     {
         if (position < 0)
@@ -118,7 +130,7 @@ public:
             return;
         }
 
-        if (pos == 1)
+        if (pos == 0)
         {
             pop_front();
             return;
@@ -126,7 +138,7 @@ public:
 
         Node *temp = head;
 
-        for (int i = 1; i < pos; i++)
+        for (int i = 0; i < pos; i++)
         {
             if (!temp)
             {
@@ -270,7 +282,7 @@ bool NewCustomerJoinsLine();
 bool CustomerEndOfLineLeaves();
 bool AnyCustomerLeaves();
 bool VipStraightToFront();
-int RandCustomerInt();
+unsigned long RandCustomerInt();
 
 int main()
 {
@@ -299,7 +311,7 @@ int main()
     cout << "Store opens:" << endl;
     for (int i = 0; i < 5; i++)
     {
-        name = names.at((rand() % 99) + 1);
+        name = names.at(RandCustomerInt());
         coffeeLine.push_back(name);
         cout << "\t" << name << " joins the line" << endl;
     }
@@ -316,12 +328,17 @@ int main()
         }
         if (NewCustomerJoinsLine)
         {
-            coffeeLine.push_back();
+            coffeeLine.push_back(names.at(RandCustomerInt()));
         }
         if (CustomerEndOfLineLeaves)
         {
             coffeeLine.pop_back();
         }
+        for (int i = 0; i < coffeeLine.getSize(); i++)
+        {
+            /* code */
+        }
+        
         
         
         
@@ -351,6 +368,6 @@ bool VipStraightToFront()
 {
     return ((rand() % 100) + 1) <= 10;
 }
-int RandCustomerInt(){
+unsigned long RandCustomerInt(){
     return (rand() % 99) + 1;
 }
