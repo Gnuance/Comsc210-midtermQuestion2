@@ -225,8 +225,28 @@ public:
 
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    vector<string> names = {};
+    string fileLine = "";
+
+    // Add names to vector
     ifstream inputFile("names.txt");
-    vector<string> names = new vector<>;
+    if (!inputFile) {
+        cerr << "Unable to open file." << endl;
+        return 1;
+    }
+
+    while (getline(inputFile, fileLine))
+    {
+        names.push_back(fileLine);
+    }
+    inputFile.close();
+    // Names are now in vector
+
+    for (string name : names)
+    {
+        cout << name << " ";
+    }
+    
 
     
     return 0;
